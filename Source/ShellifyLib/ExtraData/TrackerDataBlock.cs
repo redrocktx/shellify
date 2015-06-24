@@ -27,16 +27,19 @@ namespace Shellify.ExtraData
 	{
 		public int Version { get; set; }
 		public string MachineID;
+        //public string MacAddress;
 		public Guid[] Droid { get; set; }
         public Uuid Uuid { get; set; }
 	    public Guid[] DroidBirth { get; set; }
         public Uuid UuidBirth { get; set; }
+        //public String MacAddress { get; set; }
 		
 		public TrackerDataBlock()
 		{
 			Signature = ExtraDataBlockSignature.TrackerDataBlock;
             Droid = new Guid[2];
             DroidBirth = new Guid[2];
+            //MacAddress = Uuid.MacAddress;
         }
 
         private static string ToString(IEnumerable collection)
@@ -62,9 +65,13 @@ namespace Shellify.ExtraData
             builder.AppendFormat("Version: {0}", Version); builder.AppendLine();
             builder.AppendFormat("MachineID: {0}", MachineID); builder.AppendLine();
             builder.AppendFormat("Droid:\n{0}", ToString(Droid)); builder.AppendLine();
-            builder.AppendFormat("DroidBirth:\n{0}", ToString(DroidBirth));
+            builder.AppendFormat("DroidBirth:\n{0}", ToString(DroidBirth)); ; builder.AppendLine();
+            builder.AppendFormat("Uuid MacAddress:\n{0}", Uuid.MacAddress); ; builder.AppendLine();
+            builder.AppendFormat("Uuid Timestamp:\n{0}", Uuid.Timestamp.ToShortDateString() + " " + Uuid.Timestamp.ToShortTimeString()); builder.AppendLine(); 
+            builder.AppendFormat("Uuid ClockId:\n{0}", Uuid.ClockId.ToString());
             return builder.ToString();
         }
+
 		
 	}
 }
